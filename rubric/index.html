@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مرجع تفريغ الصوت</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#f6f5f1;--sf:#fff;--tx:#1d1d1b;--mu:#6b6a64;--bd:#e2e0d8;--ac:#0f766e;--ac2:#d1fae5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#151816;--sf:#1e2321;--tx:#ecebe6;--mu:#9c9b94;--bd:#2f3633;--ac:#5eead4;--ac2:#134e4a}}
+:root[data-theme=dark]{--bg:#151816;--sf:#1e2321;--tx:#ecebe6;--mu:#9c9b94;--bd:#2f3633;--ac:#5eead4;--ac2:#134e4a}
+*,*:before,*:after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.8 Cairo,Tahoma,sans-serif}
+main{max-width:1000px;margin:auto;padding:0 16px 48px}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:12px 0 10px;z-index:5;border-bottom:1px solid var(--bd)}
+h1{font-size:20px;margin:0 0 8px;line-height:1.7}
+.bar{display:flex;gap:8px}
+button{font:inherit;cursor:pointer}
+input[type=search]{flex:1;min-width:0;padding:8px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font:inherit;unicode-bidi:plaintext}
+.rs{border:1px solid var(--bd);background:var(--sf);color:var(--mu);border-radius:8px;padding:6px 12px;white-space:nowrap}
+.pg{height:6px;background:var(--bd);border-radius:4px;margin-top:10px;overflow:hidden}.pg i{display:block;height:100%;width:0;background:var(--ac);transition:width .2s}
+.sec{background:var(--sf);border:1px solid var(--bd);border-radius:10px;margin-top:10px}
+.sec.done{border-color:var(--ac)}
+.hd{display:flex;align-items:center;gap:10px;padding:8px 14px}
+.hd input{width:20px;height:20px;accent-color:var(--ac);flex:none}
+.hd label,.hd b{flex:1;font-weight:700;cursor:pointer}
+.sec.done .hd label{text-decoration:line-through;color:var(--mu)}
+.ar{background:none;border:0;color:var(--mu);padding:2px 10px;font-size:20px;transition:transform .2s}
+.sec.open .ar{transform:rotate(180deg)}
+.bd{display:none;padding:2px 18px 14px;border-top:1px solid var(--bd)}
+.sec.open .bd{display:block}
+h3{font-size:15px;margin:12px 0 0;color:var(--ac)}
+ul{margin:4px 0 0;padding-inline-start:20px}li{margin:3px 0}
+code{background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:0 5px;unicode-bidi:isolate;font-size:.92em}
+.tb{display:grid;grid-template-columns:1fr auto 1fr auto;margin-top:8px}
+.tb.f{grid-template-columns:repeat(4,1fr)}
+.r{display:contents}.r[hidden]{display:none}
+.tb>*,.r>*{padding:4px 10px;border-bottom:1px solid var(--bd);unicode-bidi:isolate}
+.th{font-weight:700;color:var(--mu);font-size:14px}
+.y,.n{font-size:13px;white-space:nowrap;align-self:center;justify-self:start;border-radius:99px;padding:0 10px!important;border:0!important}
+.y{background:var(--ac2);color:var(--ac)}.n{color:var(--mu);background:var(--bg)}
+#no{display:none;text-align:center;color:var(--mu);margin-top:24px}
+@media(max-width:560px){.tb,.tb.f{grid-template-columns:1fr auto}.tb.f{grid-template-columns:1fr 1fr}.th:nth-child(n+3){display:none}}
+</style></head><body><main>
+<header><h1>مرجع تفريغ الصوت — قبل التسليم</h1>
+<div class="bar"><input type="search" id="q" placeholder="بحث في كل المعايير والجداول..."><button class="rs" id="rs">مهمة جديدة</button></div>
+<div class="pg"><i id="pg"></i></div></header>
+<div id="m"></div><p id="no">مفيش نتائج</p>
+<script>
+const S=[
+["تدقيق لغوي",["#كلمات","صحّحي أي كلمة لا تطابق المنطوق: مفقودة، زائدة، أو خاطئة (متشابهة النطق). لو الارتجال مش واضح: افترضي إن الممثل أدّى النص.","`هما` للمثنى (غالبًا مش بنستخدمها)، و`هم` للجمع حتى لو اتنطقت «هما».","أي حاجة شبه «بالظبط» بالضاد: `بالضبط`، مضبوط، ضابط، اضبط.","`دوّة` ✅ `دوت` ❌ (راجعي جدول الحشو).","أي غلط في النطق: اعملي له `admin-rate`.","#الإملاء","الهمزات (أ، إ، آ، ا): أكتر غلطة بتتكرر. `اكتب` أمر، `أكتب` مضارع، والموقع مش هيلقطها فلازم السياق. الألف الأصلية: `هاجيب` / `مش هجيب`.","الياء والألف اللينة: `في` بنقطتين، `إلى` بدون نقط.","التاء والهاء المربوطة: المؤنث بتاء (`شجرة` ✅ `شجره` ❌)، والضمير بهاء (`هذه` ✅ `هذة` ❌، `يأكله` ✅ `يأكلة` ❌). `بكره` بالهاء المربوطة.","الواو متصلة بما بعدها: `اقرأ واكتب` ✅ `اقرأ و اكتب` ❌.","أداة النفي `ما` مفصولة: `ما تزعلش`، `ما حدش`.","حرف الجر مفصول: `في الشارع`.","`لك` مفصولة: `قلت لك`، `قالت لي`.","`في` = يوجد. `فيه`: الهاء لازم تعود على حاجة قبلها والسياق قابل للتأنيث.","مد آخر الحرف مش بيتكتب، لكن حشو `آآ` بيتكتب: `بس آآ`.","مسافة زيادة أو كلام ملزوق ❌: `قام   أحمد` ← `قام أحمد`."]],
+["التشكيل",["التشكيل صح لو هيفرق في المعنى. تشكيل المؤنث مهم جدًا.","ماضي المخاطبة: بدون ياء في آخره، وتُبدل بكسرة التأنيث: `قلتي` ← `قلتِ`، `رحتي` ← `رحتِ`.","مضارع المخاطبة: تبقى الياء (أصلية في الفصحى): `تقولي` (أصلها تقولين).","#التنوين","على الحرف قبل الأخير مش الأخير: `جدًا` ✅ `جداً` ❌، `مثلًا` ✅ `مثلاً` ❌.","كلمة بتاء مربوطة: على الأخير: `عامةً`، `حديقةً`.","كلمة بهمزة على السطر: على الهمزة بدون ألف: `بناءً على` ✅ `بناءًا على` ❌.","تشكيل الحشو والكلمات المحددة: راجعي جدول الحشو."]],
+["الترقيم",["اتبعي التعليمات في الجايد. كل سطر ينتهي بنقطة أو علامة استفهام.","#الفاصلة ( ، )","بدون مسافة قبلها، ومسافة بعدها، والواو بعدها متصلة: `اقرأ، واكتب الدرس.` ✅ `اقرأ ، واكتب` ❌ `اقرأ،واكتب` ❌ `اقرأ، و اكتب` ❌.","بين الجمل القصيرة المترابطة.","نفس الروتين/الترتيب/المجموعة مع حرف عطف: العطف يكفي: `أنا باصحى أصلي واعمل القهوة والفطار.`","مفيش حرف عطف: فاصلة: `الشهور الحُرم هي: رجب، ذو القعدة، ذو الحجة، محرّم.`","أفعال مالهاش علاقة ببعض: فاصلة: `...والفطار، وبعدين بانزل الشغل.`","#الفاصلة المنقوطة ( ؛ )","(1) بين جملتين إحداهما سبب أو نتيجة للأخرى. (2) بين الأقسام والتصنيفات المركبة. (3) بين الجمل الطويلة لمعادلة المعنى. اتأكدي 100% قبل وضعها أو إزالتها.","#النقطة والاستفهام والتعجب","`.` نهاية الجملة التامة أو الفقرة. `؟` الجملة الاستفهامية (غالبًا واضح من السياق).","`!` مشاعر قوية (تعجب، حزن، فرح، دعاء، تحذير): `ما شاء الله!` `واو!`","`؟!` سؤال في الظاهر وتعجب/استنكار في الباطن: `أنت بتقول لي أنا كده؟!`","#التنصيص والاعتراض","`\" \"` للمقتبس حرفيًا: `قال النبي: \"إنما الأعمال بالنيات\"`. النقل غير المباشر بدون تنصيص: ماما قال لي إني لازم أذاكر.","`- -` للجملة الاعتراضية (دعاء/توضيح): `كان عمر - رضي الله عنه - عادلًا.`","#علامة الحذف ( ... )","موجودة في الاسكريبت الأصلي للتوقف. الممثل وقف عندها: اتركيها. ما وقفش: احذفيها. ممنوع تضيفيها. لو سكت مكانها: سيبيها زي ما هي، ما تستبدليهاش بتاج وقفة.","#الشرطة (-)","متصلة بالكلمة السابقة، يليها مسافة. للتلعثم (تكرار سريع غير مقصود لكلمة أو جزء منها): `<متلعثم> أنا م- أنا مش </متلعثم> عارفة.` / `<stammer> Hur- hurry, </stammer> get out of here!`","#الشرطتان (--)","متصلتان بالكلمة السابقة، يليهما مسافة. المتحدث يقطع كلامه أو يغيّر مساره (حتى لو صحّح نفسه فورًا): `أنا عايزة شا-- قهوة.` / `أنا عايزة شا-- خلاص هامشي.` / `إحنا روحنا لل-- إحنا هنروح المحل.`","#مع التاج","الفاصلة داخل تاج الستايل. الترقيم عمومًا مع التاج. «ال» التعريف وحروف العطف والجر متصلة."]],
+["أصوات",["الأصوات غير المكتوبة (ضحك، نحنحة، عطس): تُترجم بدقة. `Ctrl+Shift` بيفتح الليستة.","التنهد معاه صوت. غير كده هو نفس.","#الضحك","1) `[ضحكة]` مرة واحدة قبل أول كلمة بتتنطق أثناء الضحك. 2) الضحك وقف والكلام استمر: بدون وسم. 3) رجع يضحك أثناء الكلام: `[ضحكة]` جديد قبل أول كلمة في المقطع. 4) ما نكررش الوسم طول الضحك المستمر.","#الحشو","ما نطيلش الحشو بحرف زيادة: `همم` مش `همممم`. الصيغة من جدول الحشو. حشو مش في القائمة: فرّغيه صوتيًا وأضيفيه كاقتراح."]],
+["ستايل",["#العلامات","علامة في النص الأصلي والأداء تفسير معقول: احتفظي بها. الممثل خرج عن النص واستخدم علامة: أضيفيها. أزيلي علامة لا تطابق الأداء. مش متأكدة: سيبيها. من التصنيف المعتمد فقط. الدقة قبل الكمية.","المشاعر بتتحط: تأكيد، تلعثم، تريقة.","#التأكيد","`*كلمة*` لكلمة فيها قوة أو إطالة أو حجم واضح. باعتدال، وبس لو متأكدة.","#التوقف","`[تَوَقُّف]` سكتة حوالي 3 ثواني. `[تَوَقُّف-طَوِيل]` حوالي 5 ثواني. لو السكتة 3 ثواني بس: استبدلي الطويل بـ`[تَوَقُّف]`.","#خطوات المراجعة","1) تصحيح الكلمات. 2) التحقق من علامات النص الأصلي. 3) إضافة/إزالة علامات من مراجعتك. 4) فحص التأكيد. 5) التأكيد النهائي: اسمعي التسجيل كله وتأكدي إن النسخة مطابقة والعلامات دقيقة."]],
+["أجنبي",["`<أجنبي> {EN} ….. </أجنبي>`","الكلمات المتعربة: هل تاخد تاج؟ راجعي جدول الأجنبي تحت.","`سوبر ماركت`: «ال» متصلة، بدون مسافة، وبعدين التاج الأجنبي."]],
+["أرقام",["الأرقام لاتيني وجوه الأقواس المعقوفة `{ }`، وتتكتب زي ما اتنطقت مش بالفصحى.","`3 سنين` ← `تلَت`.","رقم وكلام (ربع ساعة): `{0.5} {PRO: نص}`."]],
+["ملاحظات مفتوحة",["الفرق بين نفس / شهيق / زفير.","امتى أستخدم تاجز `PRO` للأرقام؟ وأعمل إيه للكلمات المتعربة؟","«مش فاهمة الحتة دي» — نقطة غير مفهومة في الملاحظات.","بند فاضي في الملاحظات."]]];
+const T=[["جدول الأجنبي: يأخذ تاج؟","a",`الماتور|0
+النوتة|1
+الموسيقى|0
+التلفيزيون|0
+مايك|1
+ميكروفون|0
+Air frayer|1
+كافيين، انسولين، فيتامين|0
+Bravo|0
+بلايستيشن|0
+مسطردة|0
+بوتاجاز|0
+تليفزيون|0
+فريزر|0
+فيديو|0
+بيجامة|0
+تيتة (جدتي)، جدو|0
+ماركة، ماركات|0
+جيبة (التنورة بالشامي)|0
+بارفان|0
+بوفيه|0
+كوبري ستانلي|0
+الاوتوستراد، كوبري ستانلي|0
+جيلي (jelly)|0
+بيتيفور|0
+بيتزا|0
+كوتشي، فانلة، جيبة، بيجاما|0
+مكياج|0
+استراتيجية|0
+تكنولوجيا|0
+فيسبوك وانستاجرام وواتس اي وسناب شات|0
+شات جي بي تي|0
+Gemini, copilot|0
+social media|1
+ايميل|1
+الستوري|1
+اونلاين|1
+كافيه، كافيتريا|1
+تراس|1
+روف|1
+ستايل|1
+صوص|1
+ليستة|1
+اسبريسو|1
+راب (موسيقى الراب)|1
+مج (mug) الشاي|1
+سبايسي|1
+سكرينة|1
+باستا، نودلز، سوشي|1
+تيشيرت|1
+مشروم، بولونيز، باستا|1
+واي فاي، راوتر|1
+جروبات، رياكتات، كومنتات|1
+ميك اب|1
+gym|1
+روتين|1
+cake|1
+Action|1
+دوبلاج-مونتاج|1
+كرواسون|1
+arcade|1
+بوستر|1
+آيس كريم|1
+كاونتر|1
+بروتين|0
+كمبيوتر|0
+لابتوب|1
+براند|1
+دليفري|1
+برينتر|1
+نوتة موسيقية|0
+اوركيسترا|1
+منيو|1
+ايشارب|0
+كيكة|0
+تورتة|0
+Symphony|1
+بيانو|0
+فايولين Violin|1
+Drums درامز|1
+GPS|1
+Coconut|1
+جراج (مكان الركنة)|0
+جراج (ورشة صيانة سيارات)|1
+ميكانيكي|0
+Snacks|1
+ساندويتش|0
+تكنيك Technique|1
+جرووت Groot (مش شخصية Marvel)|1
+بالون (منطاد)|1
+بالون اعياد الميلاد|0
+Email|1
+passport باسبور|1
+Portrait بورترية|1
+User|1
+Crash|1
+Collection|1
+Control|1
+Control زرار الكيبورد|0
+Metronome|1
+altcoin|0
+قهوة|0
+couscous|0
+kebab|0
+Chat|1
+Mood|1
+Mix|1
+Final|1
+Midterm|1
+البوستر|1
+Baby|1
+HR|1
+English|1
+French|1
+German|1
+Cash|1
+ريتم|1
+كورس|1
+KG1|0
+سيناريو|0
+الفلترة|1
+بوستات|1
+بلوزة|0
+سينما|0
+تراجيدي|1
+جاكوزي- ساونا|1
+ماستر- ماجيستير|0
+شيف|1
+يهنّج، تهنيج|1
+فلاشة|1
+فيروس|0
+كاميرا|0
+yes/no|1
+واو!|0
+إفيه|0
+مول|1
+كلاسيكي - كلاسيكية|0
+كمباوند|1
+كاتل|1
+كوميدي comedy|1
+كوميديا|0
+ريموت (التليفزيون، التكييف، العربية)|0
+بيشتغل ريموت remote|1
+كيبورد|1
+شاور|1
+تكنولوجية|0
+موبايل|0
+انترنت|0
+بنك|0
+أرشيف|0
+amazon|0
+Vanilia/فانيليا|0
+يهندل|1
+بلاستيك|0
+باسكت|1
+pdf/word|0
+بلوك|1
+بتفلتر|1
+game|1
+كارتون|0
+بايركس (pyrix)|0
+مانيوال/أوتوماتيك (للعربيات)|0
+دايت|1
+صب (بتاع المزيكا)|1
+كولدير|0
+جورنال|0
+دومينو/دومنة|0
+YouTube|0
+بولينج|0
+ديسكو|1
+USB|1
+مولات|1
+بروفا|0
+بروفا (غرفة اللبس)|0
+ماتش كورة|0
+مزيكا|0
+جاكيت|0
+جوانتي|0
+كتالوج|1
+latte لاتيه|1
+كابتن Captain|1
+سوبر ماركت|1
+كابتشينو|1
+بلدوزر|1
+كود (رمز أو شفرة)|1
+شيك (أنيق)|0
+لوجستية|0
+بيهنّج|1
+كيك|1
+كيكة|0
+برافو|0
+قماش دانتيل|0`],
+["جدول الحشو والإملاء: يتسمع ← يتكتب","f",`آآه|آآ
+أهاا|أها
+اممم|إمم / امم / آمم (حسب النطق)
+إية|إيه
+يعنى|يعني
+أوكى|أوكي
+تمااام|تمام
+مثلاً|مثلًا
+أيوة|أيوه
+أه|آه
+طب|طيب، طب (حسب ما اتقالت)
+ماشى|ماشي
+معاي|معايا
+بسس|بس
+أصلا|أصلًا
+طبعا|طبعًا
+همممم / اهممم / إهممم|همم / إهم / اهم (حسب ما اتقالت)
+قوي|أوي
+بأة|بقى
+بالظبط / مضبوط|بالضبط / مضبوط
+100|مِيَّة
+مياة|مَيَّة
+دا|ده
+كدا|كده
+يلا|يالّا
+دوّت|دوّة
+ديت|ديّة
+أد|قد
+هُما|هم
+بينا|بيننا
+انت / إنت|أنت / أنتِ
+انا|أنا
+احنا|إحنا
+دوّن|دوًا
+دوله|دوُلَة
+اخد|آخد (أنا آخد) / أخد (هو أخد)
+اكل|آكل (أنا آكل) / أكل (الأكل طعمه حلو) / (هو أكل الأكل كله)
+شوفت / شوفناه|شُفت / شُفناه`]];
+const norm=s=>s.replace(/[\u064B-\u0652\u0640]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').toLowerCase();
+const E=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/`([^`]+)`/g,'<code>$1</code>');
+const L=a=>{let h='',o=0;for(const x of a){if(x[0]=='#'){if(o)h+='</ul>';h+='<h3>'+E(x.slice(1))+'</h3><ul>';o=1}else{if(!o){h+='<ul>';o=1}h+='<li>'+E(x)+'</li>'}}return h+'</ul>'};
+const M=document.getElementById('m');let st={};
+try{st=JSON.parse(localStorage.getItem('chk')||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem('chk',JSON.stringify(st))}catch(e){}};
+const mk=(title,body,i)=>{const d=document.createElement('section');d.className='sec';
+d.dataset.t=norm(title+' '+(i<0?'':body.replace(/<[^>]+>/g,' ')));
+const head=i<0?'<b>'+title+'</b>':`<input type="checkbox" id="c${i}"><label for="c${i}">${title}</label>`;
+d.innerHTML=`<div class="hd">${head}<button class="ar" aria-label="فتح أو قفل">▾</button></div><div class="bd">${body}</div>`;
+d.querySelector('.ar').onclick=()=>{d.classList.toggle('open');delete d.dataset.a};
+if(i>=0){const c=d.querySelector('input');c.checked=!!st[i];d.classList.toggle('done',c.checked);
+c.onchange=()=>{st[i]=c.checked;d.classList.toggle('done',c.checked);save();prog()}}
+M.appendChild(d);return d};
+S.forEach((s,i)=>mk(s[0],L(s[1]),i));
+T.forEach(t=>{const f=t[1]=='f';let h='<div class="tb'+(f?' f':'')+'"><div class="th">'+(f?'يتسمع':'كلمة')+'</div><div class="th">'+(f?'يتكتب':'تاج؟')+'</div><div class="th">'+(f?'يتسمع':'كلمة')+'</div><div class="th">'+(f?'يتكتب':'تاج؟')+'</div>';
+t[2].split('\n').forEach(l=>{const[a,b]=l.split('|');const v=f?'<div>'+E(b)+'</div>':(b=='1'?'<div class="y">يأخذ تاج</div>':'<div class="n">بدون</div>');
+h+='<div class="r" data-t="'+norm(a+' '+(f?b:b=='1'?'تاج':'بدون'))+'"><div>'+E(a)+'</div>'+v+'</div>'});
+mk(t[0],h+'</div>',-1)});
+const prog=()=>{const n=S.filter((_,i)=>st[i]).length;document.getElementById('pg').style.width=n/S.length*100+'%'};prog();
+document.getElementById('rs').onclick=()=>{st={};save();document.querySelectorAll('.hd input').forEach(c=>{c.checked=false;c.closest('.sec').classList.remove('done')});prog()};
+document.getElementById('q').oninput=e=>{const v=norm(e.target.value.trim());let any=0;
+document.querySelectorAll('.sec').forEach(s=>{let hit,rows=s.querySelectorAll('.r');
+if(rows.length){let n=0;rows.forEach(r=>{const m=!v||r.dataset.t.includes(v);r.hidden=!m;if(m)n++});hit=!v||n>0||s.dataset.t.includes(v);if(v&&!n&&hit)rows.forEach(r=>r.hidden=false)}
+else hit=!v||s.dataset.t.includes(v);
+s.style.display=hit?'':'none';if(hit)any=1;
+if(v&&hit&&!s.classList.contains('open')){s.classList.add('open');s.dataset.a=1}
+if(!v&&s.dataset.a){s.classList.remove('open');delete s.dataset.a}});
+document.getElementById('no').style.display=any?'none':'block'};
+</script></main></body></html>
