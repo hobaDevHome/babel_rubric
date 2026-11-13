@@ -1,317 +1,1609 @@
 <!doctype html>
-<html lang="ar" dir="rtl"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>مرجع تفريغ الصوت</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap">
-<style>
-:root{--bg:#f6f5f1;--sf:#fff;--tx:#1d1d1b;--mu:#6b6a64;--bd:#e2e0d8;--ac:#0f766e;--ac2:#d1fae5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#151816;--sf:#1e2321;--tx:#ecebe6;--mu:#9c9b94;--bd:#2f3633;--ac:#5eead4;--ac2:#134e4a}}
-:root[data-theme=dark]{--bg:#151816;--sf:#1e2321;--tx:#ecebe6;--mu:#9c9b94;--bd:#2f3633;--ac:#5eead4;--ac2:#134e4a}
-*,*:before,*:after{box-sizing:inherit}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.8 Cairo,Tahoma,sans-serif}
-main{max-width:1000px;margin:auto;padding:0 16px 48px}
-header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:12px 0 10px;z-index:5;border-bottom:1px solid var(--bd)}
-h1{font-size:20px;margin:0 0 8px;line-height:1.7}
-.bar{display:flex;gap:8px}
-button{font:inherit;cursor:pointer}
-input[type=search]{flex:1;min-width:0;padding:8px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font:inherit;unicode-bidi:plaintext}
-.rs{border:1px solid var(--bd);background:var(--sf);color:var(--mu);border-radius:8px;padding:6px 12px;white-space:nowrap}
-.pg{height:6px;background:var(--bd);border-radius:4px;margin-top:10px;overflow:hidden}.pg i{display:block;height:100%;width:0;background:var(--ac);transition:width .2s}
-.sec{background:var(--sf);border:1px solid var(--bd);border-radius:10px;margin-top:10px}
-.sec.done{border-color:var(--ac)}
-.hd{display:flex;align-items:center;gap:10px;padding:8px 14px}
-.hd input{width:20px;height:20px;accent-color:var(--ac);flex:none}
-.hd label,.hd b{flex:1;font-weight:700;cursor:pointer}
-.sec.done .hd label{text-decoration:line-through;color:var(--mu)}
-.ar{background:none;border:0;color:var(--mu);padding:2px 10px;font-size:20px;transition:transform .2s}
-.sec.open .ar{transform:rotate(180deg)}
-.bd{display:none;padding:2px 18px 14px;border-top:1px solid var(--bd)}
-.sec.open .bd{display:block}
-h3{font-size:15px;margin:12px 0 0;color:var(--ac)}
-ul{margin:4px 0 0;padding-inline-start:20px}li{margin:3px 0}
-code{background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:0 5px;unicode-bidi:isolate;font-size:.92em}
-.tb{display:grid;grid-template-columns:1fr auto 1fr auto;margin-top:8px}
-.tb.f{grid-template-columns:repeat(4,1fr)}
-.r{display:contents}.r[hidden]{display:none}
-.tb>*,.r>*{padding:4px 10px;border-bottom:1px solid var(--bd);unicode-bidi:isolate}
-.th{font-weight:700;color:var(--mu);font-size:14px}
-.y,.n{font-size:13px;white-space:nowrap;align-self:center;justify-self:start;border-radius:99px;padding:0 10px!important;border:0!important}
-.y{background:var(--ac2);color:var(--ac)}.n{color:var(--mu);background:var(--bg)}
-#no{display:none;text-align:center;color:var(--mu);margin-top:24px}
-@media(max-width:560px){.tb,.tb.f{grid-template-columns:1fr auto}.tb.f{grid-template-columns:1fr 1fr}.th:nth-child(n+3){display:none}}
-</style></head><body><main>
-<header><h1>مرجع تفريغ الصوت — قبل التسليم</h1>
-<div class="bar"><input type="search" id="q" placeholder="بحث في كل المعايير والجداول..."><button class="rs" id="rs">مهمة جديدة</button></div>
-<div class="pg"><i id="pg"></i></div></header>
-<div id="m"></div><p id="no">مفيش نتائج</p>
-<script>
-const S=[
-["تدقيق لغوي",["#كلمات","صحّحي أي كلمة لا تطابق المنطوق: مفقودة، زائدة، أو خاطئة (متشابهة النطق). لو الارتجال مش واضح: افترضي إن الممثل أدّى النص.","`هما` للمثنى (غالبًا مش بنستخدمها)، و`هم` للجمع حتى لو اتنطقت «هما».","أي حاجة شبه «بالظبط» بالضاد: `بالضبط`، مضبوط، ضابط، اضبط.","`دوّة` ✅ `دوت` ❌ (راجعي جدول الحشو).","أي غلط في النطق: اعملي له `admin-rate`.","#الإملاء","الهمزات (أ، إ، آ، ا): أكتر غلطة بتتكرر. `اكتب` أمر، `أكتب` مضارع، والموقع مش هيلقطها فلازم السياق. الألف الأصلية: `هاجيب` / `مش هجيب`.","الياء والألف اللينة: `في` بنقطتين، `إلى` بدون نقط.","التاء والهاء المربوطة: المؤنث بتاء (`شجرة` ✅ `شجره` ❌)، والضمير بهاء (`هذه` ✅ `هذة` ❌، `يأكله` ✅ `يأكلة` ❌). `بكره` بالهاء المربوطة.","الواو متصلة بما بعدها: `اقرأ واكتب` ✅ `اقرأ و اكتب` ❌.","أداة النفي `ما` مفصولة: `ما تزعلش`، `ما حدش`.","حرف الجر مفصول: `في الشارع`.","`لك` مفصولة: `قلت لك`، `قالت لي`.","`في` = يوجد. `فيه`: الهاء لازم تعود على حاجة قبلها والسياق قابل للتأنيث.","مد آخر الحرف مش بيتكتب، لكن حشو `آآ` بيتكتب: `بس آآ`.","مسافة زيادة أو كلام ملزوق ❌: `قام   أحمد` ← `قام أحمد`."]],
-["التشكيل",["التشكيل صح لو هيفرق في المعنى. تشكيل المؤنث مهم جدًا.","ماضي المخاطبة: بدون ياء في آخره، وتُبدل بكسرة التأنيث: `قلتي` ← `قلتِ`، `رحتي` ← `رحتِ`.","مضارع المخاطبة: تبقى الياء (أصلية في الفصحى): `تقولي` (أصلها تقولين).","#التنوين","على الحرف قبل الأخير مش الأخير: `جدًا` ✅ `جداً` ❌، `مثلًا` ✅ `مثلاً` ❌.","كلمة بتاء مربوطة: على الأخير: `عامةً`، `حديقةً`.","كلمة بهمزة على السطر: على الهمزة بدون ألف: `بناءً على` ✅ `بناءًا على` ❌.","تشكيل الحشو والكلمات المحددة: راجعي جدول الحشو."]],
-["الترقيم",["اتبعي التعليمات في الجايد. كل سطر ينتهي بنقطة أو علامة استفهام.","#الفاصلة ( ، )","بدون مسافة قبلها، ومسافة بعدها، والواو بعدها متصلة: `اقرأ، واكتب الدرس.` ✅ `اقرأ ، واكتب` ❌ `اقرأ،واكتب` ❌ `اقرأ، و اكتب` ❌.","بين الجمل القصيرة المترابطة.","نفس الروتين/الترتيب/المجموعة مع حرف عطف: العطف يكفي: `أنا باصحى أصلي واعمل القهوة والفطار.`","مفيش حرف عطف: فاصلة: `الشهور الحُرم هي: رجب، ذو القعدة، ذو الحجة، محرّم.`","أفعال مالهاش علاقة ببعض: فاصلة: `...والفطار، وبعدين بانزل الشغل.`","#الفاصلة المنقوطة ( ؛ )","(1) بين جملتين إحداهما سبب أو نتيجة للأخرى. (2) بين الأقسام والتصنيفات المركبة. (3) بين الجمل الطويلة لمعادلة المعنى. اتأكدي 100% قبل وضعها أو إزالتها.","#النقطة والاستفهام والتعجب","`.` نهاية الجملة التامة أو الفقرة. `؟` الجملة الاستفهامية (غالبًا واضح من السياق).","`!` مشاعر قوية (تعجب، حزن، فرح، دعاء، تحذير): `ما شاء الله!` `واو!`","`؟!` سؤال في الظاهر وتعجب/استنكار في الباطن: `أنت بتقول لي أنا كده؟!`","#التنصيص والاعتراض","`\" \"` للمقتبس حرفيًا: `قال النبي: \"إنما الأعمال بالنيات\"`. النقل غير المباشر بدون تنصيص: ماما قال لي إني لازم أذاكر.","`- -` للجملة الاعتراضية (دعاء/توضيح): `كان عمر - رضي الله عنه - عادلًا.`","#علامة الحذف ( ... )","موجودة في الاسكريبت الأصلي للتوقف. الممثل وقف عندها: اتركيها. ما وقفش: احذفيها. ممنوع تضيفيها. لو سكت مكانها: سيبيها زي ما هي، ما تستبدليهاش بتاج وقفة.","#الشرطة (-)","متصلة بالكلمة السابقة، يليها مسافة. للتلعثم (تكرار سريع غير مقصود لكلمة أو جزء منها): `<متلعثم> أنا م- أنا مش </متلعثم> عارفة.` / `<stammer> Hur- hurry, </stammer> get out of here!`","#الشرطتان (--)","متصلتان بالكلمة السابقة، يليهما مسافة. المتحدث يقطع كلامه أو يغيّر مساره (حتى لو صحّح نفسه فورًا): `أنا عايزة شا-- قهوة.` / `أنا عايزة شا-- خلاص هامشي.` / `إحنا روحنا لل-- إحنا هنروح المحل.`","#مع التاج","الفاصلة داخل تاج الستايل. الترقيم عمومًا مع التاج. «ال» التعريف وحروف العطف والجر متصلة."]],
-["أصوات",["الأصوات غير المكتوبة (ضحك، نحنحة، عطس): تُترجم بدقة. `Ctrl+Shift` بيفتح الليستة.","التنهد معاه صوت. غير كده هو نفس.","#الضحك","1) `[ضحكة]` مرة واحدة قبل أول كلمة بتتنطق أثناء الضحك. 2) الضحك وقف والكلام استمر: بدون وسم. 3) رجع يضحك أثناء الكلام: `[ضحكة]` جديد قبل أول كلمة في المقطع. 4) ما نكررش الوسم طول الضحك المستمر.","#الحشو","ما نطيلش الحشو بحرف زيادة: `همم` مش `همممم`. الصيغة من جدول الحشو. حشو مش في القائمة: فرّغيه صوتيًا وأضيفيه كاقتراح."]],
-["ستايل",["#العلامات","علامة في النص الأصلي والأداء تفسير معقول: احتفظي بها. الممثل خرج عن النص واستخدم علامة: أضيفيها. أزيلي علامة لا تطابق الأداء. مش متأكدة: سيبيها. من التصنيف المعتمد فقط. الدقة قبل الكمية.","المشاعر بتتحط: تأكيد، تلعثم، تريقة.","#التأكيد","`*كلمة*` لكلمة فيها قوة أو إطالة أو حجم واضح. باعتدال، وبس لو متأكدة.","#التوقف","`[تَوَقُّف]` سكتة حوالي 3 ثواني. `[تَوَقُّف-طَوِيل]` حوالي 5 ثواني. لو السكتة 3 ثواني بس: استبدلي الطويل بـ`[تَوَقُّف]`.","#خطوات المراجعة","1) تصحيح الكلمات. 2) التحقق من علامات النص الأصلي. 3) إضافة/إزالة علامات من مراجعتك. 4) فحص التأكيد. 5) التأكيد النهائي: اسمعي التسجيل كله وتأكدي إن النسخة مطابقة والعلامات دقيقة."]],
-["أجنبي",["`<أجنبي> {EN} ….. </أجنبي>`","الكلمات المتعربة: هل تاخد تاج؟ راجعي جدول الأجنبي تحت.","`سوبر ماركت`: «ال» متصلة، بدون مسافة، وبعدين التاج الأجنبي."]],
-["أرقام",["الأرقام لاتيني وجوه الأقواس المعقوفة `{ }`، وتتكتب زي ما اتنطقت مش بالفصحى.","`3 سنين` ← `تلَت`.","رقم وكلام (ربع ساعة): `{0.5} {PRO: نص}`."]],
-["ملاحظات مفتوحة",["الفرق بين نفس / شهيق / زفير.","امتى أستخدم تاجز `PRO` للأرقام؟ وأعمل إيه للكلمات المتعربة؟","«مش فاهمة الحتة دي» — نقطة غير مفهومة في الملاحظات.","بند فاضي في الملاحظات."]]];
-const T=[["جدول الأجنبي: يأخذ تاج؟","a",`الماتور|0
-النوتة|1
-الموسيقى|0
-التلفيزيون|0
-مايك|1
-ميكروفون|0
-Air frayer|1
-كافيين، انسولين، فيتامين|0
-Bravo|0
-بلايستيشن|0
-مسطردة|0
-بوتاجاز|0
-تليفزيون|0
-فريزر|0
-فيديو|0
-بيجامة|0
-تيتة (جدتي)، جدو|0
-ماركة، ماركات|0
-جيبة (التنورة بالشامي)|0
-بارفان|0
-بوفيه|0
-كوبري ستانلي|0
-الاوتوستراد، كوبري ستانلي|0
-جيلي (jelly)|0
-بيتيفور|0
-بيتزا|0
-كوتشي، فانلة، جيبة، بيجاما|0
-مكياج|0
-استراتيجية|0
-تكنولوجيا|0
-فيسبوك وانستاجرام وواتس اي وسناب شات|0
-شات جي بي تي|0
-Gemini, copilot|0
-social media|1
-ايميل|1
-الستوري|1
-اونلاين|1
-كافيه، كافيتريا|1
-تراس|1
-روف|1
-ستايل|1
-صوص|1
-ليستة|1
-اسبريسو|1
-راب (موسيقى الراب)|1
-مج (mug) الشاي|1
-سبايسي|1
-سكرينة|1
-باستا، نودلز، سوشي|1
-تيشيرت|1
-مشروم، بولونيز، باستا|1
-واي فاي، راوتر|1
-جروبات، رياكتات، كومنتات|1
-ميك اب|1
-gym|1
-روتين|1
-cake|1
-Action|1
-دوبلاج-مونتاج|1
-كرواسون|1
-arcade|1
-بوستر|1
-آيس كريم|1
-كاونتر|1
-بروتين|0
-كمبيوتر|0
-لابتوب|1
-براند|1
-دليفري|1
-برينتر|1
-نوتة موسيقية|0
-اوركيسترا|1
-منيو|1
-ايشارب|0
-كيكة|0
-تورتة|0
-Symphony|1
-بيانو|0
-فايولين Violin|1
-Drums درامز|1
-GPS|1
-Coconut|1
-جراج (مكان الركنة)|0
-جراج (ورشة صيانة سيارات)|1
-ميكانيكي|0
-Snacks|1
-ساندويتش|0
-تكنيك Technique|1
-جرووت Groot (مش شخصية Marvel)|1
-بالون (منطاد)|1
-بالون اعياد الميلاد|0
-Email|1
-passport باسبور|1
-Portrait بورترية|1
-User|1
-Crash|1
-Collection|1
-Control|1
-Control زرار الكيبورد|0
-Metronome|1
-altcoin|0
-قهوة|0
-couscous|0
-kebab|0
-Chat|1
-Mood|1
-Mix|1
-Final|1
-Midterm|1
-البوستر|1
-Baby|1
-HR|1
-English|1
-French|1
-German|1
-Cash|1
-ريتم|1
-كورس|1
-KG1|0
-سيناريو|0
-الفلترة|1
-بوستات|1
-بلوزة|0
-سينما|0
-تراجيدي|1
-جاكوزي- ساونا|1
-ماستر- ماجيستير|0
-شيف|1
-يهنّج، تهنيج|1
-فلاشة|1
-فيروس|0
-كاميرا|0
-yes/no|1
-واو!|0
-إفيه|0
-مول|1
-كلاسيكي - كلاسيكية|0
-كمباوند|1
-كاتل|1
-كوميدي comedy|1
-كوميديا|0
-ريموت (التليفزيون، التكييف، العربية)|0
-بيشتغل ريموت remote|1
-كيبورد|1
-شاور|1
-تكنولوجية|0
-موبايل|0
-انترنت|0
-بنك|0
-أرشيف|0
-amazon|0
-Vanilia/فانيليا|0
-يهندل|1
-بلاستيك|0
-باسكت|1
-pdf/word|0
-بلوك|1
-بتفلتر|1
-game|1
-كارتون|0
-بايركس (pyrix)|0
-مانيوال/أوتوماتيك (للعربيات)|0
-دايت|1
-صب (بتاع المزيكا)|1
-كولدير|0
-جورنال|0
-دومينو/دومنة|0
-YouTube|0
-بولينج|0
-ديسكو|1
-USB|1
-مولات|1
-بروفا|0
-بروفا (غرفة اللبس)|0
-ماتش كورة|0
-مزيكا|0
-جاكيت|0
-جوانتي|0
-كتالوج|1
-latte لاتيه|1
-كابتن Captain|1
-سوبر ماركت|1
-كابتشينو|1
-بلدوزر|1
-كود (رمز أو شفرة)|1
-شيك (أنيق)|0
-لوجستية|0
-بيهنّج|1
-كيك|1
-كيكة|0
-برافو|0
-قماش دانتيل|0`],
-["جدول الحشو والإملاء: يتسمع ← يتكتب","f",`آآه|آآ
-أهاا|أها
-اممم|إمم / امم / آمم (حسب النطق)
-إية|إيه
-يعنى|يعني
-أوكى|أوكي
-تمااام|تمام
-مثلاً|مثلًا
-أيوة|أيوه
-أه|آه
-طب|طيب، طب (حسب ما اتقالت)
-ماشى|ماشي
-معاي|معايا
-بسس|بس
-أصلا|أصلًا
-طبعا|طبعًا
-همممم / اهممم / إهممم|همم / إهم / اهم (حسب ما اتقالت)
-قوي|أوي
-بأة|بقى
-بالظبط / مضبوط|بالضبط / مضبوط
-100|مِيَّة
-مياة|مَيَّة
-دا|ده
-كدا|كده
-يلا|يالّا
-دوّت|دوّة
-ديت|ديّة
-أد|قد
-هُما|هم
-بينا|بيننا
-انت / إنت|أنت / أنتِ
-انا|أنا
-احنا|إحنا
-دوّن|دوًا
-دوله|دوُلَة
-اخد|آخد (أنا آخد) / أخد (هو أخد)
-اكل|آكل (أنا آكل) / أكل (الأكل طعمه حلو) / (هو أكل الأكل كله)
-شوفت / شوفناه|شُفت / شُفناه`]];
-const norm=s=>s.replace(/[\u064B-\u0652\u0640]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').toLowerCase();
-const E=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/`([^`]+)`/g,'<code>$1</code>');
-const L=a=>{let h='',o=0;for(const x of a){if(x[0]=='#'){if(o)h+='</ul>';h+='<h3>'+E(x.slice(1))+'</h3><ul>';o=1}else{if(!o){h+='<ul>';o=1}h+='<li>'+E(x)+'</li>'}}return h+'</ul>'};
-const M=document.getElementById('m');let st={};
-try{st=JSON.parse(localStorage.getItem('chk')||'{}')}catch(e){}
-const save=()=>{try{localStorage.setItem('chk',JSON.stringify(st))}catch(e){}};
-const mk=(title,body,i)=>{const d=document.createElement('section');d.className='sec';
-d.dataset.t=norm(title+' '+(i<0?'':body.replace(/<[^>]+>/g,' ')));
-const head=i<0?'<b>'+title+'</b>':`<input type="checkbox" id="c${i}"><label for="c${i}">${title}</label>`;
-d.innerHTML=`<div class="hd">${head}<button class="ar" aria-label="فتح أو قفل">▾</button></div><div class="bd">${body}</div>`;
-d.querySelector('.ar').onclick=()=>{d.classList.toggle('open');delete d.dataset.a};
-if(i>=0){const c=d.querySelector('input');c.checked=!!st[i];d.classList.toggle('done',c.checked);
-c.onchange=()=>{st[i]=c.checked;d.classList.toggle('done',c.checked);save();prog()}}
-M.appendChild(d);return d};
-S.forEach((s,i)=>mk(s[0],L(s[1]),i));
-T.forEach(t=>{const f=t[1]=='f';let h='<div class="tb'+(f?' f':'')+'"><div class="th">'+(f?'يتسمع':'كلمة')+'</div><div class="th">'+(f?'يتكتب':'تاج؟')+'</div><div class="th">'+(f?'يتسمع':'كلمة')+'</div><div class="th">'+(f?'يتكتب':'تاج؟')+'</div>';
-t[2].split('\n').forEach(l=>{const[a,b]=l.split('|');const v=f?'<div>'+E(b)+'</div>':(b=='1'?'<div class="y">يأخذ تاج</div>':'<div class="n">بدون</div>');
-h+='<div class="r" data-t="'+norm(a+' '+(f?b:b=='1'?'تاج':'بدون'))+'"><div>'+E(a)+'</div>'+v+'</div>'});
-mk(t[0],h+'</div>',-1)});
-const prog=()=>{const n=S.filter((_,i)=>st[i]).length;document.getElementById('pg').style.width=n/S.length*100+'%'};prog();
-document.getElementById('rs').onclick=()=>{st={};save();document.querySelectorAll('.hd input').forEach(c=>{c.checked=false;c.closest('.sec').classList.remove('done')});prog()};
-document.getElementById('q').oninput=e=>{const v=norm(e.target.value.trim());let any=0;
-document.querySelectorAll('.sec').forEach(s=>{let hit,rows=s.querySelectorAll('.r');
-if(rows.length){let n=0;rows.forEach(r=>{const m=!v||r.dataset.t.includes(v);r.hidden=!m;if(m)n++});hit=!v||n>0||s.dataset.t.includes(v);if(v&&!n&&hit)rows.forEach(r=>r.hidden=false)}
-else hit=!v||s.dataset.t.includes(v);
-s.style.display=hit?'':'none';if(hit)any=1;
-if(v&&hit&&!s.classList.contains('open')){s.classList.add('open');s.dataset.a=1}
-if(!v&&s.dataset.a){s.classList.remove('open');delete s.dataset.a}});
-document.getElementById('no').style.display=any?'none':'block'};
-</script></main></body></html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>مرجع تفريغ الصوت</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+    />
+    <style>
+      :root {
+        --bg: #f6f5f1;
+        --sf: #fff;
+        --tx: #1d1d1b;
+        --mu: #6b6a64;
+        --bd: #e2e0d8;
+        --ac: #0f766e;
+        --ac2: #d1fae5;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #151816;
+          --sf: #1e2321;
+          --tx: #ecebe6;
+          --mu: #9c9b94;
+          --bd: #2f3633;
+          --ac: #5eead4;
+          --ac2: #134e4a;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #151816;
+        --sf: #1e2321;
+        --tx: #ecebe6;
+        --mu: #9c9b94;
+        --bd: #2f3633;
+        --ac: #5eead4;
+        --ac2: #134e4a;
+      }
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--tx);
+        font:
+          16px/1.8 Cairo,
+          Tahoma,
+          sans-serif;
+      }
+      main {
+        max-width: 1000px;
+        margin: auto;
+        padding: 0 16px 48px;
+      }
+      header {
+        position: sticky;
+        top: env(safe-area-inset-top, 0px);
+        background: var(--bg);
+        padding: 12px 0 10px;
+        z-index: 5;
+        border-bottom: 1px solid var(--bd);
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0 0 8px;
+        line-height: 1.7;
+      }
+      .bar {
+        display: flex;
+        gap: 8px;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+      input[type="search"] {
+        flex: 1;
+        min-width: 0;
+        padding: 8px 12px;
+        border: 1px solid var(--bd);
+        border-radius: 8px;
+        background: var(--sf);
+        color: var(--tx);
+        font: inherit;
+        unicode-bidi: plaintext;
+      }
+      .rs {
+        border: 1px solid var(--bd);
+        background: var(--sf);
+        color: var(--mu);
+        border-radius: 8px;
+        padding: 6px 12px;
+        white-space: nowrap;
+      }
+      .pg {
+        height: 6px;
+        background: var(--bd);
+        border-radius: 4px;
+        margin-top: 10px;
+        overflow: hidden;
+      }
+      .pg i {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: var(--ac);
+        transition: width 0.2s;
+      }
+      .sec {
+        background: var(--sf);
+        border: 1px solid var(--bd);
+        border-radius: 10px;
+        margin-top: 10px;
+      }
+      .sec.done {
+        border-color: var(--ac);
+      }
+      .hd {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+      }
+      .hd input {
+        width: 20px;
+        height: 20px;
+        accent-color: var(--ac);
+        flex: none;
+      }
+      .hd label,
+      .hd b {
+        flex: 1;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .sec.done .hd label {
+        text-decoration: line-through;
+        color: var(--mu);
+      }
+      .ar {
+        background: none;
+        border: 0;
+        color: var(--mu);
+        padding: 2px 10px;
+        font-size: 20px;
+        transition: transform 0.2s;
+      }
+      .sec.open .ar {
+        transform: rotate(180deg);
+      }
+      .bd {
+        display: none;
+        padding: 2px 18px 14px;
+        border-top: 1px solid var(--bd);
+      }
+      .sec.open .bd {
+        display: block;
+      }
+      h3 {
+        font-size: 15px;
+        margin: 12px 0 0;
+        color: var(--ac);
+      }
+      ul {
+        margin: 4px 0 0;
+        padding-inline-start: 20px;
+      }
+      li {
+        margin: 3px 0;
+      }
+      code {
+        background: var(--bg);
+        border: 1px solid var(--bd);
+        border-radius: 4px;
+        padding: 0 5px;
+        unicode-bidi: isolate;
+        font-size: 0.92em;
+      }
+      .tb {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto;
+        margin-top: 8px;
+      }
+      .tb.f {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .r {
+        display: contents;
+      }
+      .r[hidden] {
+        display: none;
+      }
+      .tb > *,
+      .r > * {
+        padding: 4px 10px;
+        border-bottom: 1px solid var(--bd);
+        unicode-bidi: isolate;
+      }
+      .th {
+        font-weight: 700;
+        color: var(--mu);
+        font-size: 14px;
+      }
+      .y,
+      .n {
+        font-size: 13px;
+        white-space: nowrap;
+        align-self: center;
+        justify-self: start;
+        border-radius: 99px;
+        padding: 0 10px !important;
+        border: 0 !important;
+      }
+      .y {
+        background: var(--ac2);
+        color: var(--ac);
+      }
+      .n {
+        color: var(--mu);
+        background: var(--bg);
+      }
+      #no {
+        display: none;
+        text-align: center;
+        color: var(--mu);
+        margin-top: 24px;
+      }
+      @media (max-width: 560px) {
+        .tb,
+        .tb.f {
+          grid-template-columns: 1fr auto;
+        }
+        .tb.f {
+          grid-template-columns: 1fr 1fr;
+        }
+        .th:nth-child(n + 3) {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>مرجع تفريغ الصوت — قبل التسليم</h1>
+        <div class="bar">
+          <input
+            type="search"
+            id="q"
+            placeholder="بحث في كل المعايير والجداول..."
+          /><button class="rs" id="rs">مهمة جديدة</button>
+        </div>
+        <div class="pg"><i id="pg"></i></div>
+      </header>
+
+      <section class="sec">
+        <div class="hd">
+          <input type="checkbox" id="c0" /><label for="c0">تدقيق لغوي</label
+          ><button class="ar" aria-label="فتح أو قفل">▾</button>
+        </div>
+        <div class="bd">
+          <h3>كلمات</h3>
+          <ul>
+            <li>
+              <code>هما</code> للمثنى (غالبًا مش بنستخدمها)، و<code>هم</code>
+              للجمع حتى لو اتنطقت «هما».
+            </li>
+            <li>
+              أي حاجة شبه «بالظبط» بالضاد: <code>بالضبط</code>، مضبوط، ضابط،
+              اضبط.
+            </li>
+            <li>
+              <code>دوّة</code> ✅ <code>دوت</code> ❌ (راجعي جدول الحشو).
+            </li>
+          </ul>
+          <h3>الإملاء</h3>
+          <ul>
+            <li><code>اكتب</code> أمر， <code>أكتب</code> مضارع</li>
+            <li><code>هاجيب</code> / <code>مش هجيب</code>.</li>
+
+            <li>
+              الياء والألف اللينة: <code>في</code> بنقطتين،
+              <code>إلى</code> بدون نقط.
+            </li>
+            <li>
+              : المؤنث بتاء (<code>شجرة</code> ✅ <code>شجره</code> ❌)، والضمير
+              بهاء (<code>هذه</code> ✅ <code>هذة</code> ❌،
+              <code>يأكله</code> ✅ <code>يأكلة</code> ❌).
+              <code>بكره</code> بالهاء المربوطة.
+            </li>
+            <li>
+              الواو متصلة بما بعدها: <code>اقرأ واكتب</code> ✅
+              <code>اقرأ و اكتب</code> ❌.
+            </li>
+            <li>
+              أداة النفي <code>ما</code> مفصولة: <code>ما تزعلش</code>،
+              <code>ما حدش</code>.
+            </li>
+            <li>حرف الجر مفصول: <code>في الشارع</code>.</li>
+            <li>
+              <code>لك</code> مفصولة: <code>قلت لك</code>، <code>قالت لي</code>.
+            </li>
+            <li>
+              <code>في</code> = يوجد. <code>فيه</code>: الهاء لازم تعود على حاجة
+              قبلها والسياق قابل للتأنيث.
+            </li>
+            <li>
+              مد آخر الحرف مش بيتكتب، لكن حشو <code>آآ</code> بيتكتب:
+              <code>بس آآ</code>.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="hd">
+          <input type="checkbox" id="c1" /><label for="c1">التشكيل</label
+          ><button class="ar" aria-label="فتح أو قفل">▾</button>
+        </div>
+        <div class="bd">
+          <ul>
+            <li>التشكيل صح لو هيفرق في المعنى. تشكيل المؤنث مهم جدًا.</li>
+            <li>
+              ماضي المخاطبة: بدون ياء في آخره، وتُبدل بكسرة التأنيث:
+              <code>قلتي</code> ← <code>قلتِ</code>، <code>رحتي</code> ←
+              <code>رحتِ</code>.
+            </li>
+            <li>
+              مضارع المخاطبة: تبقى الياء (أصلية في الفصحى):
+              <code>تقولي</code> (أصلها تقولين).
+            </li>
+          </ul>
+          <h3>التنوين</h3>
+          <ul>
+            <li>
+              على الحرف قبل الأخير مش الأخير: <code>جدًا</code> ✅
+              <code>جداً</code> ❌، <code>مثلًا</code> ✅ <code>مثلاً</code> ❌.
+            </li>
+            <li>
+              كلمة بتاء مربوطة: على الأخير: <code>عامةً</code>،
+              <code>حديقةً</code>.
+            </li>
+            <li>
+              كلمة بهمزة على السطر: على الهمزة بدون ألف:
+              <code>بناءً على</code> ✅ <code>بناءًا على</code> ❌.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="hd">
+          <input type="checkbox" id="c2" /><label for="c2">الترقيم</label
+          ><button class="ar" aria-label="فتح أو قفل">▾</button>
+        </div>
+        <div class="bd">
+          <ul>
+            <li>
+              اتبعي التعليمات في الجايد. كل سطر ينتهي بنقطة أو علامة استفهام.
+            </li>
+          </ul>
+          <h3>الفاصلة ( ، )</h3>
+          <ul>
+            <li>
+              بدون مسافة قبلها، ومسافة بعدها، والواو بعدها متصلة:
+              <code>اقرأ، واكتب الدرس.</code> ✅ <code>اقرأ ، واكتب</code> ❌
+              <code>اقرأ،واكتب</code> ❌ <code>اقرأ، و اكتب</code> ❌.
+            </li>
+            <li>بين الجمل القصيرة المترابطة.</li>
+            <li>
+              نفس الروتين/الترتيب/المجموعة مع حرف عطف: العطف يكفي:
+              <code>أنا باصحى أصلي واعمل القهوة والفطار.</code>
+            </li>
+            <li>
+              مفيش حرف عطف: فاصلة:
+              <code>الشهور الحُرم هي: رجب، ذو القعدة، ذو الحجة، محرّم.</code>
+            </li>
+            <li>
+              أفعال مالهاش علاقة ببعض: فاصلة:
+              <code>...والفطار، وبعدين بانزل الشغل.</code>
+            </li>
+          </ul>
+          <h3>الفاصلة المنقوطة ( ؛ )</h3>
+          <ul>
+            <li>
+              (1) بين جملتين إحداهما سبب أو نتيجة للأخرى. (2) بين الأقسام
+              والتصنيفات المركبة. (3) بين الجمل الطويلة لمعادلة المعنى. اتأكدي
+              100% قبل وضعها أو إزالتها.
+            </li>
+          </ul>
+          <h3>النقطة والاستفهام والتعجب</h3>
+          <ul>
+            <li>
+              <code>.</code> نهاية الجملة التامة أو الفقرة.
+              <code>؟</code> الجملة الاستفهامية (غالبًا واضح من السياق).
+            </li>
+            <li>
+              <code>!</code> مشاعر قوية (تعجب، حزن، فرح، دعاء، تحذير):
+              <code>ما شاء الله!</code> <code>واو!</code>
+            </li>
+            <li>
+              <code>؟!</code> سؤال في الظاهر وتعجب/استنكار في الباطن:
+              <code>أنت بتقول لي أنا كده؟!</code>
+            </li>
+          </ul>
+          <h3>التنصيص والاعتراض</h3>
+          <ul>
+            <li>
+              <code>" "</code> للمقتبس حرفيًا:
+              <code>قال النبي: "إنما الأعمال بالنيات"</code>. النقل غير المباشر
+              بدون تنصيص: ماما قال لي إني لازم أذاكر.
+            </li>
+            <li>
+              <code>- -</code> للجملة الاعتراضية (دعاء/توضيح):
+              <code>كان عمر - رضي الله عنه - عادلًا.</code>
+            </li>
+          </ul>
+          <h3>علامة الحذف ( ... )</h3>
+          <ul>
+            <li>
+              موجودة في الاسكريبت الأصلي للتوقف. الممثل وقف عندها: اتركيها. ما
+              وقفش: احذفيها. ممنوع تضيفيها. لو سكت مكانها: سيبيها زي ما هي، ما
+              تستبدليهاش بتاج وقفة.
+            </li>
+          </ul>
+          <h3>الشرطة (-)</h3>
+          <ul>
+            <li>
+              متصلة بالكلمة السابقة، يليها مسافة. للتلعثم (تكرار سريع غير مقصود
+              لكلمة أو جزء منها):
+              <code>&lt;متلعثم&gt; أنا م- أنا مش &lt;/متلعثم&gt; عارفة.</code> /
+            </li>
+          </ul>
+          <h3>الشرطتان (--)</h3>
+          <ul>
+            <li>
+              متصلتان بالكلمة السابقة، يليهما مسافة. المتحدث يقطع كلامه أو يغيّر
+              مساره (حتى لو صحّح نفسه فورًا):
+              <code>أنا عايزة شا-- قهوة.</code> /
+              <code>أنا عايزة شا-- خلاص هامشي.</code> /
+              <code>إحنا روحنا لل-- إحنا هنروح المحل.</code>
+            </li>
+          </ul>
+          <h3>مع التاج</h3>
+          <ul>
+            <li>
+              الفاصلة داخل تاج الستايل. الترقيم عمومًا مع التاج. «ال» التعريف
+              وحروف العطف والجر متصلة.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="hd">
+          <input type="checkbox" id="c3" /><label for="c3">أصوات</label
+          ><button class="ar" aria-label="فتح أو قفل">▾</button>
+        </div>
+        <div class="bd">
+          <ul>
+            <li>
+              الأصوات غير المكتوبة (ضحك، نحنحة، عطس): تُترجم بدقة.
+              <code>Ctrl+Shift</code> بيفتح الليستة.
+            </li>
+            <li>التنهد معاه صوت. غير كده هو نفس.</li>
+          </ul>
+          <h3>الضحك</h3>
+          <ul>
+            <li>
+              1) <code>[ضحكة]</code> مرة واحدة قبل أول كلمة بتتنطق أثناء الضحك.
+              2) الضحك وقف والكلام استمر: بدون وسم. 3) رجع يضحك أثناء الكلام:
+              <code>[ضحكة]</code> جديد قبل أول كلمة في المقطع. 4) ما نكررش الوسم
+              طول الضحك المستمر.
+            </li>
+          </ul>
+          <h3>الحشو</h3>
+          <ul>
+            <li>
+              ما نطيلش الحشو بحرف زيادة: <code>همم</code> مش <code>همممم</code>.
+              الصيغة من جدول الحشو. حشو مش في القائمة: فرّغيه صوتيًا وأضيفيه
+              كاقتراح.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="hd">
+          <input type="checkbox" id="c4" /><label for="c4">ستايل</label
+          ><button class="ar" aria-label="فتح أو قفل">▾</button>
+        </div>
+        <div class="bd">
+          <h3>العلامات</h3>
+          <ul>
+            <li>
+              الممثل خرج عن النص واستخدم علامة: أضيفيها. أزيلي علامة لا تطابق
+              الأداء. مش متأكدة: سيبيها. من التصنيف المعتمد فقط. الدقة قبل
+              الكمية.
+            </li>
+            <li>المشاعر بتتحط: تأكيد، تلعثم، تريقة.</li>
+          </ul>
+          <h3>التأكيد</h3>
+          <ul>
+            <li>
+              <code>*كلمة*</code> لكلمة فيها قوة أو إطالة أو حجم واضح. باعتدال،
+              وبس لو متأكدة.
+            </li>
+          </ul>
+          <h3>التوقف</h3>
+          <ul>
+            <li><code>[تَوَقُّف]</code> سكتة حوالي 1.5 ثواني.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="hd">
+          <input type="checkbox" id="c5" /><label for="c5">أجنبي</label
+          ><button class="ar" aria-label="فتح أو قفل">▾</button>
+        </div>
+        <div class="bd">
+          <ul>
+            <li><code>&lt;أجنبي&gt; {EN} captian &lt;/أجنبي&gt;</code></li>
+            <li><code>سوبر ماركت</code>: «ال» مسافة، وبعدين التاج الأجنبي.</li>
+            <li>
+              ال <code>&lt;أجنبي&gt; {EN} supermarket &lt;/أجنبي&gt;</code>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="hd">
+          <input type="checkbox" id="c6" /><label for="c6">أرقام</label
+          ><button class="ar" aria-label="فتح أو قفل">▾</button>
+        </div>
+        <div class="bd">
+          <ul>
+            <li>
+              الأرقام لاتيني وجوه الأقواس المعقوفة <code>{ }</code>، وتتكتب زي
+              ما اتنطقت مش بالفصحى.
+            </li>
+            <li><code>3 سنين</code> ← <code>تلَت</code>.</li>
+            <li>وقفنا {3} {PRO: تَلَتْ} دقايق</li>
+            <li>رقم وكلام (ربع ساعة): <code>{0.5} {PRO: نص}</code>.</li>
+            <li>لنا {10} {PRO: عشر} دقايق</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="hd">
+          <b>جدول الأجنبي: يأخذ تاج؟</b
+          ><button class="ar" aria-label="فتح أو قفل">▾</button>
+        </div>
+        <div class="bd">
+          <div class="tb">
+            <div class="th">كلمة</div>
+            <div class="th">تاج؟</div>
+            <div class="th">كلمة</div>
+            <div class="th">تاج؟</div>
+            <div class="r">
+              <div>الماتور</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>النوتة</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>الموسيقى</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>التلفيزيون</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>مايك</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>ميكروفون</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>Air frayer</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كافيين، انسولين، فيتامين</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>Bravo</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>بلايستيشن</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>مسطردة</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>بوتاجاز</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>تليفزيون</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>فريزر</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>فيديو</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>بيجامة</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>تيتة (جدتي)، جدو</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>ماركة، ماركات</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>جيبة (التنورة بالشامي)</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>بارفان</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>بوفيه</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>كوبري ستانلي</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>الاوتوستراد، كوبري ستانلي</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>جيلي (jelly)</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>بيتيفور</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>بيتزا</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>كوتشي، فانلة، جيبة، بيجاما</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>مكياج</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>استراتيجية</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>تكنولوجيا</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>فيسبوك وانستاجرام وواتس اي وسناب شات</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>شات جي بي تي</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>Gemini, copilot</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>social media</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>ايميل</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>الستوري</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>اونلاين</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كافيه، كافيتريا</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>تراس</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>روف</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>ستايل</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>صوص</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>ليستة</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>اسبريسو</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>راب (موسيقى الراب)</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>مج (mug) الشاي</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>سبايسي</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>سكرينة</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>باستا، نودلز، سوشي</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>تيشيرت</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>مشروم، بولونيز، باستا</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>واي فاي، راوتر</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>جروبات، رياكتات، كومنتات</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>ميك اب</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>gym</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>روتين</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>cake</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>Action</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>دوبلاج-مونتاج</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كرواسون</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>arcade</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>بوستر</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>آيس كريم</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كاونتر</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>بروتين</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>كمبيوتر</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>لابتوب</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>براند</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>دليفري</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>برينتر</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>نوتة موسيقية</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>اوركيسترا</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>منيو</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>ايشارب</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>كيكة</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>تورتة</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>Symphony</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>بيانو</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>فايولين Violin</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>Drums درامز</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>GPS</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>Coconut</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>جراج (مكان الركنة)</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>جراج (ورشة صيانة سيارات)</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>ميكانيكي</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>Snacks</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>ساندويتش</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>تكنيك Technique</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>جرووت Groot (مش شخصية Marvel)</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>بالون (منطاد)</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>بالون اعياد الميلاد</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>Email</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>passport باسبور</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>Portrait بورترية</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>User</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>Crash</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>Collection</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>Control</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>Control زرار الكيبورد</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>Metronome</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>altcoin</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>قهوة</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>couscous</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>kebab</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>Chat</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>Mood</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>Mix</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>Final</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>Midterm</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>البوستر</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>Baby</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>HR</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>English</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>French</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>German</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>Cash</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>ريتم</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كورس</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>KG1</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>سيناريو</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>الفلترة</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>بوستات</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>بلوزة</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>سينما</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>تراجيدي</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>جاكوزي- ساونا</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>ماستر- ماجيستير</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>شيف</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>يهنّج، تهنيج</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>فلاشة</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>فيروس</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>كاميرا</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>yes/no</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>واو!</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>إفيه</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>مول</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كلاسيكي - كلاسيكية</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>كمباوند</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كاتل</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كوميدي comedy</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كوميديا</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>ريموت (التليفزيون، التكييف، العربية)</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>بيشتغل ريموت remote</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كيبورد</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>شاور</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>تكنولوجية</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>موبايل</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>انترنت</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>بنك</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>أرشيف</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>amazon</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>Vanilia/فانيليا</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>يهندل</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>بلاستيك</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>باسكت</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>pdf/word</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>بلوك</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>بتفلتر</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>game</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كارتون</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>بايركس (pyrix)</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>مانيوال/أوتوماتيك (للعربيات)</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>دايت</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>صب (بتاع المزيكا)</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كولدير</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>جورنال</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>دومينو/دومنة</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>YouTube</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>بولينج</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>ديسكو</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>USB</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>مولات</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>بروفا</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>بروفا (غرفة اللبس)</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>ماتش كورة</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>مزيكا</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>جاكيت</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>جوانتي</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>كتالوج</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>latte لاتيه</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كابتن Captain</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>سوبر ماركت</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كابتشينو</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>بلدوزر</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كود (رمز أو شفرة)</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>شيك (أنيق)</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>لوجستية</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>بيهنّج</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كيك</div>
+              <div class="y">يأخذ تاج</div>
+            </div>
+            <div class="r">
+              <div>كيكة</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>برافو</div>
+              <div class="n">بدون</div>
+            </div>
+            <div class="r">
+              <div>قماش دانتيل</div>
+              <div class="n">بدون</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec">
+        <div class="hd">
+          <b>جدول الحشو والإملاء: يتسمع ← يتكتب</b
+          ><button class="ar" aria-label="فتح أو قفل">▾</button>
+        </div>
+        <div class="bd">
+          <div class="tb f">
+            <div class="th">يتسمع</div>
+            <div class="th">يتكتب</div>
+            <div class="th">يتسمع</div>
+            <div class="th">يتكتب</div>
+            <div class="r">
+              <div>آآه</div>
+              <div>آآ</div>
+            </div>
+            <div class="r">
+              <div>أهاا</div>
+              <div>أها</div>
+            </div>
+            <div class="r">
+              <div>اممم</div>
+              <div>إمم / امم / آمم (حسب النطق)</div>
+            </div>
+            <div class="r">
+              <div>إية</div>
+              <div>إيه</div>
+            </div>
+            <div class="r">
+              <div>يعنى</div>
+              <div>يعني</div>
+            </div>
+            <div class="r">
+              <div>أوكى</div>
+              <div>أوكي</div>
+            </div>
+            <div class="r">
+              <div>تمااام</div>
+              <div>تمام</div>
+            </div>
+            <div class="r">
+              <div>مثلاً</div>
+              <div>مثلًا</div>
+            </div>
+            <div class="r">
+              <div>أيوة</div>
+              <div>أيوه</div>
+            </div>
+            <div class="r">
+              <div>أه</div>
+              <div>آه</div>
+            </div>
+            <div class="r">
+              <div>طب</div>
+              <div>طيب، طب (حسب ما اتقالت)</div>
+            </div>
+            <div class="r">
+              <div>ماشى</div>
+              <div>ماشي</div>
+            </div>
+            <div class="r">
+              <div>معاي</div>
+              <div>معايا</div>
+            </div>
+            <div class="r">
+              <div>بسس</div>
+              <div>بس</div>
+            </div>
+            <div class="r">
+              <div>أصلا</div>
+              <div>أصلًا</div>
+            </div>
+            <div class="r">
+              <div>طبعا</div>
+              <div>طبعًا</div>
+            </div>
+            <div class="r">
+              <div>همممم / اهممم / إهممم</div>
+              <div>همم / إهم / اهم (حسب ما اتقالت)</div>
+            </div>
+            <div class="r">
+              <div>قوي</div>
+              <div>أوي</div>
+            </div>
+            <div class="r">
+              <div>بأة</div>
+              <div>بقى</div>
+            </div>
+            <div class="r">
+              <div>بالظبط / مضبوط</div>
+              <div>بالضبط / مضبوط</div>
+            </div>
+            <div class="r">
+              <div>100</div>
+              <div>مِيَّة</div>
+            </div>
+            <div class="r">
+              <div>مياة</div>
+              <div>مَيَّة</div>
+            </div>
+            <div class="r">
+              <div>دا</div>
+              <div>ده</div>
+            </div>
+            <div class="r">
+              <div>كدا</div>
+              <div>كده</div>
+            </div>
+            <div class="r">
+              <div>يلا</div>
+              <div>يالّا</div>
+            </div>
+            <div class="r">
+              <div>دوّت</div>
+              <div>دوّة</div>
+            </div>
+            <div class="r">
+              <div>ديت</div>
+              <div>ديّة</div>
+            </div>
+            <div class="r">
+              <div>أد</div>
+              <div>قد</div>
+            </div>
+            <div class="r">
+              <div>هُما</div>
+              <div>هم</div>
+            </div>
+            <div class="r">
+              <div>بينا</div>
+              <div>بيننا</div>
+            </div>
+            <div class="r">
+              <div>انت / إنت</div>
+              <div>أنت / أنتِ</div>
+            </div>
+            <div class="r">
+              <div>انا</div>
+              <div>أنا</div>
+            </div>
+            <div class="r">
+              <div>احنا</div>
+              <div>إحنا</div>
+            </div>
+            <div class="r">
+              <div>دوّن</div>
+              <div>دوًا</div>
+            </div>
+            <div class="r">
+              <div>دوله</div>
+              <div>دوُلَة</div>
+            </div>
+            <div class="r">
+              <div>اخد</div>
+              <div>آخد (أنا آخد) / أخد (هو أخد)</div>
+            </div>
+            <div class="r">
+              <div>اكل</div>
+              <div>
+                آكل (أنا آكل) / أكل (الأكل طعمه حلو) / (هو أكل الأكل كله)
+              </div>
+            </div>
+            <div class="r">
+              <div>شوفت / شوفناه</div>
+              <div>شُفت / شُفناه</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <p id="no">مفيش نتائج</p>
+    </main>
+    <script>
+      const norm = (s) =>
+        s
+          .replace(/[\u064B-\u0652\u0640]/g, "")
+          .replace(/[أإآٱ]/g, "ا")
+          .replace(/ى/g, "ي")
+          .replace(/ة/g, "ه")
+          .toLowerCase();
+      const $ = (s) => document.querySelectorAll(s);
+      let st = {};
+      try {
+        st = JSON.parse(localStorage.getItem("chk") || "{}");
+      } catch (e) {}
+      const save = () => {
+        try {
+          localStorage.setItem("chk", JSON.stringify(st));
+        } catch (e) {}
+      };
+      const checks = $(".hd input");
+      const prog = () => {
+        const n = [...checks].filter((c) => c.checked).length;
+        document.getElementById("pg").style.width =
+          (n / checks.length) * 100 + "%";
+      };
+      checks.forEach((c) => {
+        c.checked = !!st[c.id];
+        c.closest(".sec").classList.toggle("done", c.checked);
+        c.onchange = () => {
+          st[c.id] = c.checked;
+          c.closest(".sec").classList.toggle("done", c.checked);
+          save();
+          prog();
+        };
+      });
+      prog();
+      $(".ar").forEach(
+        (b) =>
+          (b.onclick = () => {
+            const s = b.closest(".sec");
+            s.classList.toggle("open");
+            delete s.dataset.a;
+          }),
+      );
+      $(".sec").forEach((s) => {
+        const hasCheck = s.querySelector(".hd input");
+        s.dataset.t = norm(
+          hasCheck ? s.textContent : s.querySelector(".hd").textContent,
+        );
+      });
+      $(".r").forEach((r) => (r.dataset.t = norm(r.textContent)));
+      document.getElementById("rs").onclick = () => {
+        st = {};
+        save();
+        checks.forEach((c) => {
+          c.checked = false;
+          c.closest(".sec").classList.remove("done");
+        });
+        prog();
+      };
+      document.getElementById("q").oninput = (e) => {
+        const v = norm(e.target.value.trim());
+        let any = 0;
+        $(".sec").forEach((s) => {
+          const rows = s.querySelectorAll(".r");
+          let hit;
+          if (rows.length) {
+            let n = 0;
+            rows.forEach((r) => {
+              const m = !v || r.dataset.t.includes(v);
+              r.hidden = !m;
+              if (m) n++;
+            });
+            hit = !v || n > 0 || s.dataset.t.includes(v);
+            if (v && !n && hit) rows.forEach((r) => (r.hidden = false));
+          } else hit = !v || s.dataset.t.includes(v);
+          s.style.display = hit ? "" : "none";
+          if (hit) any = 1;
+          if (v && hit && !s.classList.contains("open")) {
+            s.classList.add("open");
+            s.dataset.a = 1;
+          }
+          if (!v && s.dataset.a) {
+            s.classList.remove("open");
+            delete s.dataset.a;
+          }
+        });
+        document.getElementById("no").style.display = any ? "none" : "block";
+      };
+    </script>
+  </body>
+</html>
