@@ -182,6 +182,27 @@
       li {
         margin: 3px 0;
       }
+      ul.ck {
+        list-style: none;
+        padding-inline-start: 0;
+      }
+      .ci label {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        cursor: pointer;
+      }
+      .ci input {
+        width: 18px;
+        height: 18px;
+        margin-top: 7px;
+        accent-color: var(--ac);
+        flex: none;
+      }
+      .ci input:checked + span {
+        color: var(--mu);
+        text-decoration: line-through;
+      }
       code {
         background: var(--bg);
         border: 1px solid var(--bd);
@@ -274,109 +295,378 @@
         </div>
         <div class="bd">
           <h3>الإملاء</h3>
-          <ul>
-            <li>كبري الفونت عشان تشوفي الحروف كويس عشان مفيش حاجة تقع</li>
-            <li>لو قال كلمة مش موجودة ف الوجود نعمل فلاج للتاسك</li>
-            <li><b>ما تنسيش التنوين</b></li>
-            <li>أنت من غير فتحة - بنحط الكسرة للمؤنث بس</li>
-            <li>
-              عايزاكِ تحكي لي عملتِ إيه عند الباب خطوة بخطوة، وكمان قولي لي
-              لفيتِ المفتاح مرتين والّا بس قفلتِ الباب وراكِ؟ لأ، ما هو أنا
-              عايزة إجابة محددة قبل ما أقرر إذا كنت هارجع للشقة والّا لأ
+          <ul class="ck">
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i0" /><span
+                  >كبري الفونت عشان تشوفي الحروف كويس عشان مفيش حاجة تقع</span
+                ></label
+              >
             </li>
-            <li>
-              <code>هما</code> للمثنى (غالبًا مش بنستخدمها)، و<code>هم</code>
-              للجمع حتى لو اتنطقت «هما».
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i1" /><span
+                  >لو قال كلمة مش موجودة ف الوجود نعمل فلاج للتاسك</span
+                ></label
+              >
             </li>
-            <li>
-              <code>اصحابنا</code> </code>
-              مش صحابنا
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i2" /><span
+                  ><b>ما تنسيش التنوين</b></span
+                ></label
+              >
             </li>
-            <li>
-              أي حاجة شبه «بالظبط» بالضاد: <code>بالضبط</code>، مضبوط، ضابط،
-              اضبط.
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i3" /><span
+                  >أنت من غير فتحة - بنحط الكسرة للمؤنث بس</span
+                ></label
+              >
             </li>
-            <li><code>دوّة</code> ✅ <code>دوت</code></li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i4" /><span>
+                  عايزاكِ تحكي لي عملتِ إيه عند الباب خطوة بخطوة، وكمان قولي لي
+                  لفيتِ المفتاح مرتين والّا بس قفلتِ الباب وراكِ؟ لأ، ما هو أنا
+                  عايزة إجابة محددة قبل ما أقرر إذا كنت هارجع للشقة والّا لأ
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i5" /><span>
+                  <code>هما</code> للمثنى (غالبًا مش بنستخدمها)، و<code
+                    >هم</code
+                  >
+                  للجمع حتى لو اتنطقت «هما».
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i6" /><span>
+                  <code>اصحابنا</code>
+                  مش صحابنا
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i7" /><span>
+                  أي حاجة شبه «بالظبط» بالضاد: <code>بالضبط</code>، مضبوط، ضابط،
+                  اضبط.
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i8" /><span
+                  ><code>دوّة</code> ✅ <code>دوت</code></span
+                ></label
+              >
+            </li>
           </ul>
 
-          <ul>
-            <li><code>اكتب</code> أمر， <code>أكتب</code> مضارع</li>
-            <li><code>هاجيب</code> / <code>مش هجيب</code>.</li>
+          <ul class="ck">
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i9" /><span
+                  ><code>اكتب</code> أمر， <code>أكتب</code> مضارع</span
+                ></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i10" /><span
+                  ><code>هاجيب</code> / <code>مش هجيب</code>.</span
+                ></label
+              >
+            </li>
 
-            <li>
-              الياء والألف اللينة: <code>في</code> بنقطتين،
-              <code>إلى</code> بدون نقط.
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i11" /><span>
+                  الياء والألف اللينة: <code>في</code> بنقطتين،
+                  <code>إلى</code> بدون نقط.
+                </span></label
+              >
             </li>
-            <li>
-              : المؤنث بتاء (<code>شجرة</code> ✅ <code>شجره</code> ❌)، والضمير
-              بهاء (<code>هذه</code> ✅ <code>هذة</code> ❌،
-              <code>يأكله</code> ✅ <code>يأكلة</code> ❌).
-              
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i12" /><span>
+                  : المؤنث بتاء (<code>شجرة</code> ✅ <code>شجره</code> ❌)،
+                  والضمير بهاء (<code>هذه</code> ✅ <code>هذة</code> ❌،
+                  <code>يأكله</code> ✅ <code>يأكلة</code> ❌).
+                </span></label
+              >
             </li>
-        
-            <li>
-              أداة النفي <code>ما</code> مفصولة: <code>ما تزعلش</code>،
-              <code>ما حدش</code>.
+
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i13" /><span>
+                  أداة النفي <code>ما</code> مفصولة: <code>ما تزعلش</code>،
+                  <code>ما حدش</code>.
+                </span></label
+              >
             </li>
-            <li>حرف الجر مفصول: <code>في الشارع</code>.</li>
-            <li><code>ليَّا</code> مش ليا</li>
-            <li><code>عليَّا</code> مش عليا</li>
-            <li>
-              <code>لك</code> مفصولة: <code>قلت لك</code>، <code>قالت لي</code>.
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i14" /><span
+                  >حرف الجر مفصول: <code>في الشارع</code>.</span
+                ></label
+              >
             </li>
-            <li>بقى لنا - مش بقالنا</li>
-            
-            <li>احكِ فعل امر للمذكر - احكي فعل امر للمؤنث</li>
-            <li>النهارده - بالهاء</li>
-            <li>بكرة - بالتاء</li>
-            <li>موريّهاني - لو نطقها نون - موريّها لي - لو نطقها لام</li>
-            <li>يالّا بينا</li>
-            <li> - كإنه - مش كأنه</li>
-            <li>الافعال العربي بتبدأ بي يكتب اتين ف المضارع – ييجي</li>
-        
-            <li>إضافة الالف الاصلي ف الماضي - خدت تتكتب أخدت</li>
-            <li>ولا - نافية - مثال: ولا عملت غدا ولا روقت</li>
-            <li>والّا - اختيارية - مثال : والّا عايزة تنامي الاول</li>
-            <li>
-              مد آخر الحرف مش بيتكتب، لكن حشو <code>آآ</code> بيتكتب:
-              <code>بس آآ</code>.
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i15" /><span
+                  ><code>ليَّا</code> مش ليا</span
+                ></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i16" /><span
+                  ><code>عليَّا</code> مش عليا</span
+                ></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i17" /><span
+                  ><code>كام</code> مش كم</span
+                ></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i18" /><span>
+                  <code>لك</code> مفصولة: <code>قلت لك</code>،
+                  <code>قالت لي</code>.
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i19" /><span
+                  >بقى لنا - مش بقالنا</span
+                ></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i20" /><span>
+                  ما ليش دعوة
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i21" /><span>
+                  برضو - برضه- الاتنين صح بس وحدها ف التاسك
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i22" /><span>
+                  قُل له - قولي له
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i23" /><span>
+                  متطمن - مش مطمن
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i24" /><span>
+                  لأن - لإن حسب النطق
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i25" /><span>
+                  جوّه - برّه -
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i26" /><span>
+                  إمبارح
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i27" /><span>
+                  ميعاد - مش معاد
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i28" /><span>
+                  عشان او علشان حسب اللي بيتقال
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i29" /><span
+                  >الحشو : لو كانت مفصولة عن الحرف الأخير من الكلمة… بتكون كلمة
+                  حشو (آآ) وباكتب بعدها فاصلة (،) ودي نفرقها عن مد الحرف الأخير
+                  من الكلمة يعني بس آآ، مش عارف تختلف عن بساااااا مش عارف … دي
+                </span></label
+              >
+            </li>
+
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i30" /><span
+                  >احكِ فعل امر للمذكر - احكي فعل امر للمؤنث</span
+                ></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i31" /><span
+                  >النهارده - بالهاء</span
+                ></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i32" /><span
+                  >بكرة - بالتاء</span
+                ></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i33" /><span
+                  >موريّهاني - لو نطقها نون - موريّها لي - لو نطقها لام</span
+                ></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i34" /><span
+                  >يالّا بينا</span
+                ></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i35" /><span>
+                  كأن وكإن حسب النطق
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i36" /><span
+                  >الافعال العربي بتبدأ بي يكتب اتين ف المضارع – ييجي</span
+                ></label
+              >
+            </li>
+
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i37" /><span
+                  >إضافة الالف الاصلي ف الماضي - خدت تتكتب أخدت</span
+                ></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i38" /><span
+                  >ولا - نافية - مثال: ولا عملت غدا ولا روقت</span
+                ></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i39" /><span
+                  >والّا - اختيارية - مثال : والّا عايزة تنامي الاول</span
+                ></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i40" /><span>
+                  مد آخر الحرف مش بيتكتب، لكن حشو <code>آآ</code> بيتكتب:
+                  <code>بس آآ</code>.
+                </span></label
+              >
             </li>
           </ul>
-        </div>
-      </section>
 
-      <section class="sec">
-        <div class="hd">
-          <input type="checkbox" id="c1" /><label for="c1">التشكيل</label
-          ><button class="ar" aria-label="فتح أو قفل">▾</button>
-        </div>
-        <div class="bd">
-          <ul>
-            <li>التشكيل صح لو هيفرق في المعنى. تشكيل المؤنث مهم جدًا.</li>
-            <li>
-              ماضي المخاطبة: بدون ياء في آخره، وتُبدل بكسرة التأنيث:
-              <code>قلتي</code> ← <code>قلتِ</code>، <code>رحتي</code> ←
-              <code>رحتِ</code>.
+          <h3>التشكيل</h3>
+          <ul class="ck">
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i41" /><span
+                  >التشكيل صح لو هيفرق في المعنى. تشكيل المؤنث مهم جدًا.</span
+                ></label
+              >
             </li>
-            <li>
-              مضارع المخاطبة: تبقى الياء (أصلية في الفصحى):
-              <code>تقولي</code> (أصلها تقولين).
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i42" /><span>
+                  ماضي المخاطبة: بدون ياء في آخره، وتُبدل بكسرة التأنيث:
+                  <code>قلتي</code> ← <code>قلتِ</code>، <code>رحتي</code> ←
+                  <code>رحتِ</code>.
+                </span></label
+              >
             </li>
-            <li>تشكيل الافعال - شُفت</li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i43" /><span>
+                  مضارع المخاطبة: تبقى الياء (أصلية في الفصحى):
+                  <code>تقولي</code> (أصلها تقولين).
+                </span></label
+              >
+            </li>
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i44" /><span
+                  >تشكيل الافعال - شُفت</span
+                ></label
+              >
+            </li>
           </ul>
           <h3>التنوين</h3>
-          <ul>
-            <li>
-              على الحرف قبل الأخير مش الأخير: <code>جدًا</code> ✅
-              <code>جداً</code> ❌، <code>مثلًا</code> ✅ <code>مثلاً</code> ❌.
+          <ul class="ck">
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i45" /><span>
+                  على الحرف قبل الأخير مش الأخير: <code>جدًا</code> ✅
+                  <code>جداً</code> ❌، <code>مثلًا</code> ✅
+                  <code>مثلاً</code> ❌.
+                </span></label
+              >
             </li>
-            <li>
-              كلمة بتاء مربوطة: على الأخير: <code>عامةً</code>،
-              <code>حديقةً</code>.
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i46" /><span>
+                  كلمة بتاء مربوطة: على الأخير: <code>عامةً</code>،
+                  <code>حديقةً</code>.
+                </span></label
+              >
             </li>
-            <li>
-              كلمة بهمزة على السطر: على الهمزة بدون ألف:
-              <code>بناءً على</code> ✅ <code>بناءًا على</code> ❌.
+            <li class="ci">
+              <label
+                ><input type="checkbox" class="ic" id="i47" /><span>
+                  كلمة بهمزة على السطر: على الهمزة بدون ألف:
+                  <code>بناءً على</code> ✅ <code>بناءًا على</code> ❌.
+                </span></label
+              >
             </li>
           </ul>
         </div>
@@ -389,15 +679,12 @@
         </div>
         <div class="bd">
           <ul>
-            <li>
-               كل سطر ينتهي بنقطة أو علامة استفهام.
-            </li>
+            <li>كل سطر ينتهي بنقطة أو علامة استفهام.</li>
           </ul>
           <h3>الفاصلة ( ، )</h3>
           <ul>
-            
-            <li>بين الجمل القصيرة المترابطة.</li>     
-          
+            <li>بين الجمل القصيرة المترابطة.</li>
+
             <li>
               أفعال مالهاش علاقة ببعض: فاصلة:
               <code>...والفطار، وبعدين بانزل الشغل.</code>
@@ -565,18 +852,9 @@
             <li>
               <code>&lt;أجنبي&gt; {EN} الsupermarket &lt;/أجنبي&gt;</code>
             </li>
+            <li>لو الكلمة مش كلمة انجليزي بس مشتقة منها-</li>
             <li>
-              لو الكلمة مش كلمة انجليزي بس مشتقة منها- 
-              
-              
-            </li>
-              <li>
-
-<code>
-  &lt;أجنبي&gt;
-   {EN} هارستر الراوتر 
-   &lt;/أجنبي&gt;
-</code>
+              <code> &lt;أجنبي&gt; {EN} هارستر الراوتر &lt;/أجنبي&gt; </code>
             </li>
             <li>
               البراندات والاعلام والمدن والدول بتتكتب زي ما هي زي Youtube -
@@ -1533,7 +1811,7 @@
               <div>هم</div>
             </div>
             <div class="r">
-              <div>بينا</div>ٍ
+              <div>بينا</div>
               <div>بيننا</div>
             </div>
             <div class="r">
@@ -1611,6 +1889,13 @@
         };
       });
       prog();
+      $(".ic").forEach((c) => {
+        c.checked = !!st[c.id];
+        c.onchange = () => {
+          st[c.id] = c.checked;
+          save();
+        };
+      });
       $(".ar").forEach(
         (b) =>
           (b.onclick = () => {
@@ -1633,6 +1918,7 @@
           c.checked = false;
           c.closest(".sec").classList.remove("done");
         });
+        $(".ic").forEach((c) => (c.checked = false));
         prog();
       };
       document.getElementById("q").oninput = (e) => {
